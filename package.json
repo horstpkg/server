@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "prettier-standard '**/*.js' && standard"
+  },
+  "dependencies": {
+    "body": "^5.1.0",
+    "promisepipe": "^2.0.0"
+  },
+  "devDependencies": {
+    "prettier-standard": "^7.0.1",
+    "standard": "^10.0.3"
+  }
+}
