@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
   await writeFile(`${cwd}/${type}`, JSON.stringify(pkg))
   await spawnAsync('npm', ['install'], { cwd, stdio: 'inherit' })
   console.log(`[${id}] dependencies installed`)
-  await unlink(`${cwd}/package.json`)
+  await unlink(`${cwd}/${type}`)
   await pipe(cp.spawn('tar', ['-zc', '.'], { cwd }).stdout, res)
   console.log(`[${id}] response finished`)
 }
