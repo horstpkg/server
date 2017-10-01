@@ -10,7 +10,8 @@ WIP
 Set up [Now](https://zeit.co/now) on your device and run this command. [Now](https://zeit.co/now) will automatically ask you for the required information and then spin up a deployment instantly. That easy!
 
 ```bash
-now horstpkg/server
+$ now --public horstpkg/server
+$ pbpaste > ~/.horst
 ```
 
 ## License
