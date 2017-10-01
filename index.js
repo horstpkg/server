@@ -2,9 +2,9 @@
 
 const { promisify } = require('util')
 const json = promisify(require('body/json'))
-const fs = require('fs')
 const tmpdir = require('os').tmpdir()
 const mkdir = promisify(require('fs').mkdir)
+const spawn = require('child_process').spawn
 const exec = promisify(require('child_process').exec)
 const unlink = promisify(require('fs').unlink)
 const writeFile = promisify(require('fs').writeFile)
@@ -19,6 +19,5 @@ module.exports = async (req, res) => {
   await writeFile(`${cwd}/package.json`, JSON.stringify(pkg))
   await exec('npm install', { cwd })
   await unlink(`${cwd}/package.json`)
-  await exec(`tar -zcf ${cwd}.zip .`, { cwd })
-  await pipe(fs.createReadStream(`${cwd}.zip`), res)
+  await pipe(spawn('tar', ['-zc', '.'], { cwd }).stdout, res)
 }
