@@ -1,3 +1,5 @@
-# npm-server
+# horstpkg server
 
-WIP PoC npm install on the server, then shipping tarballs to the client.
+> Horst: Run npm install on the server, then ship tarballs to the client.
+
+WIP
