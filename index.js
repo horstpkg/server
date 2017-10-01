@@ -22,10 +22,11 @@ module.exports = async (req, res) => {
     .slice(2)}`
   console.log(`[${id}] ${req.method.toUpperCase()} ${req.url}`)
   const pkg = await json(req, res)
-  console.log(`[${id}] package.json received`)
+  const type = pkg.lockfileVersion ? 'package-lock.json' : 'package.json'
+  console.log(`[${id}] ${type} received`)
   const cwd = `${tmpdir}/${id}`
   await mkdir(cwd)
-  await writeFile(`${cwd}/package.json`, JSON.stringify(pkg))
+  await writeFile(`${cwd}/${type}`, JSON.stringify(pkg))
   await spawnAsync('npm', ['install'], { cwd, stdio: 'inherit' })
   console.log(`[${id}] dependencies installed`)
   await unlink(`${cwd}/package.json`)
