@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "repository": "horstpkg/server",
   "scripts": {
+    "start": "node bin/server.js",
     "test": "prettier-standard '**/*.js' && standard"
   },
   "dependencies": {
