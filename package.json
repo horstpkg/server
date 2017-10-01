@@ -7,6 +7,9 @@
     "start": "node bin/server.js",
     "test": "prettier-standard '**/*.js' && standard"
   },
+  "now": {
+    "alias": "horstpkg"
+  },
   "dependencies": {
     "body": "^5.1.0",
     "promisepipe": "^2.0.0"
