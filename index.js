@@ -17,6 +17,7 @@ const spawnAsync = (...args) =>
   })
 
 module.exports = async (req, res) => {
+  console.error(`${req.method.toUpperCase()} ${req.url}`)
   const pkg = await json(req, res)
   const cwd = `${tmpdir}/${Date.now()}${Math.random()
     .toString(16)
