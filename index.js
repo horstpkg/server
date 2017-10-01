@@ -17,14 +17,18 @@ const spawnAsync = (...args) =>
   })
 
 module.exports = async (req, res) => {
-  console.error(`${req.method.toUpperCase()} ${req.url}`)
-  const pkg = await json(req, res)
-  const cwd = `${tmpdir}/${Date.now()}${Math.random()
+  const id = `${Date.now()}${Math.random()
     .toString(16)
     .slice(2)}`
+  console.log(`[${id}] ${req.method.toUpperCase()} ${req.url}`)
+  const pkg = await json(req, res)
+  console.log(`[${id}] package.json received`)
+  const cwd = `${tmpdir}/${id}`
   await mkdir(cwd)
   await writeFile(`${cwd}/package.json`, JSON.stringify(pkg))
   await spawnAsync('npm', ['install'], { cwd, stdio: 'inherit' })
+  console.log(`[${id}] dependencies installed`)
   await unlink(`${cwd}/package.json`)
   await pipe(cp.spawn('tar', ['-zc', '.'], { cwd }).stdout, res)
+  console.log(`[${id}] response finished`)
 }
